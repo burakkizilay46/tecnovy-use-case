@@ -3,23 +3,13 @@ import Button from "../button";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  submitFunc: () => void;
+
   title: string;
   children: React.ReactNode;
 }
 
-const Modal = ({
-  isOpen,
-  onClose,
-  title,
-  children,
-  submitFunc,
-}: ModalProps) => {
+const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
   if (!isOpen) return null;
-
-  const handleSubmission = (): void => {
-    submitFunc();
-  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -35,15 +25,7 @@ const Modal = ({
             ✕
           </button>
         </div>
-        <div className="mt-4">
-          <form className="space-y-6" onSubmit={submitFunc}>
-            {children}
-          </form>
-        </div>
-        <div className="mt-6 flex justify-start">
-          <Button clickFunc={handleSubmission}>Save</Button>
-          <button type="submit">Save</button>
-        </div>
+        <div className="mt-4">{children}</div>
       </div>
     </div>
   );
